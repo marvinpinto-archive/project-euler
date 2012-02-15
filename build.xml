@@ -1,0 +1,125 @@
+<!--
+  Copyright 2012 Marvin Pinto (me@marvinp.ca)
+
+  Licensed under the Apache License, Version 2.0 (the "License"); you may not
+  use this file except in compliance with the License.  You may obtain a copy of
+  the License at
+
+  http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
+  WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.  See the
+  License for the specific language governing permissions and limitations under
+  the License.
+-->
+<project name="ProjectEuler" basedir="." default="main">
+
+  <!-- Properties -->
+  <property name="src.dir" value="src"/>
+  <property name="build.dir" value="build"/>
+  <property name="classes.dir" value="${build.dir}/classes"/>
+  <property name="srclib.dir" value="lib"/>
+  <property name="dist.dir" value="dist"/>
+  <property name="destlib.dir" value="${build.dir}/lib"/>
+  <property name="jar.dir" value="${build.dir}/jar"/>
+  <property name="main-class" value="ca.marvinp.projecteuler.ProjectEuler"/>
+
+  <!-- Build classpath -->
+  <path id="build-classpath">
+    <fileset dir="${destlib.dir}">
+      <include name="*.jar"/>
+    </fileset>
+  </path>
+
+  <!-- Clean target -->
+  <target name="clean">
+    <delete dir="${ant.project.name}"/>
+    <delete dir="${build.dir}"/>
+    <delete dir="${dist.dir}"/>
+  </target>
+
+  <!-- Copy referenced jar files and set the manifest classpath -->
+  <target name="copyjars" depends="clean">
+    <mkdir dir="${destlib.dir}"/>
+    <copy todir="${destlib.dir}" flatten="true">
+      <fileset dir="${srclib.dir}">
+        <include name="**/*.jar" />
+      </fileset>
+    </copy>
+    <manifestclasspath property="jar.classpath" jarfile="${destlib.dir}/*.jar">
+      <classpath refid="build-classpath"/>
+    </manifestclasspath>
+  </target>
+
+  <!-- Compile target -->
+  <target name="compile" depends="copyjars">
+    <mkdir dir="${classes.dir}"/>
+    <javac srcdir="${src.dir}"
+           destdir="${classes.dir}"
+           classpathref="build-classpath" />
+  </target>
+
+  <!-- Jar target -->
+  <target name="jar" depends="compile">
+    <mkdir dir="${jar.dir}"/>
+    <mkdir dir="${classes.dir}/input"/>
+    <copy todir="${classes.dir}/input" flatten="true">
+      <fileset dir="input">
+        <include name="**/*.txt" />
+      </fileset>
+    </copy>
+    <copy file="LICENSE.txt"
+          tofile="${classes.dir}/META-INF/${ant.project.name}-LICENSE.txt"/>
+    <copy file="NOTICE.txt"
+          tofile="${classes.dir}/META-INF/${ant.project.name}-NOTICE.txt"/>
+    <jar destfile="${jar.dir}/${ant.project.name}.jar" basedir="${classes.dir}">
+      <zipgroupfileset dir="lib" includes="*.jar" />
+      <manifest>
+        <attribute name="Main-Class" value="${main-class}"/>
+        <attribute name="Class-Path" value="${jar.classpath}"/>
+      </manifest>
+    </jar>
+  </target>
+
+
+  <!-- Package target -->
+  <target name="package" depends="jar">
+    <mkdir dir="${dist.dir}"/>
+    <mkdir dir="${ant.project.name}"/>
+    <copy todir="${ant.project.name}" flatten="true">
+      <fileset dir="${jar.dir}">
+        <include name="**/*.jar" />
+      </fileset>
+    </copy>
+    <copy file="LICENSE.txt"
+          tofile="${ant.project.name}/LICENSE.txt"/>
+    <copy file="NOTICE.txt"
+          tofile="${ant.project.name}/NOTICE.txt"/>
+  </target>
+
+  <!-- Zip target -->
+  <target name="zip" depends="package">
+    <zip destfile="${dist.dir}/${ant.project.name}.zip"
+         basedir="${ant.project.name}" />
+  </target>
+
+  <!-- tgz target -->
+  <target name="tgz" depends="zip">
+    <tar destfile="${dist.dir}/${ant.project.name}.tar"
+         basedir="${ant.project.name}" />
+    <gzip destfile="${dist.dir}/${ant.project.name}.tar.gz"
+          src="${dist.dir}/${ant.project.name}.tar"/>
+  </target>
+
+  <!-- Final touches: clean directory of unwanted stuff -->
+  <target name="dist" depends="tgz">
+    <delete dir="${ant.project.name}"/>
+    <delete dir="${build.dir}"/>
+    <delete file="${dist.dir}/${ant.project.name}.tar"/>
+  </target>
+
+  <target name="main" depends="dist"/>
+</project>
+
+
