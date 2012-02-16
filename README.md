@@ -107,5 +107,10 @@ issues running this program.
  - [Problem 12](https://projecteuler.net/problem=12)
  - [Problem 13](https://projecteuler.net/problem=13)
  - [Problem 14](https://projecteuler.net/problem=14)
+ - [Problem 16](https://projecteuler.net/problem=16)
+ - [Problem 17](https://projecteuler.net/problem=17)
  - [Problem 20](https://projecteuler.net/problem=20)
+ - [Problem 22](https://projecteuler.net/problem=22)
+ - [Problem 24](https://projecteuler.net/problem=24)
+ - [Problem 25](https://projecteuler.net/problem=25)
 

@@ -128,11 +128,41 @@ public class ProjectEuler {
       System.out.println();
       System.out.println(p14.getAnswer());
       break;
+    case 16:
+      P16 p16 = new P16();
+      System.out.println(p16.getQuestion());
+      System.out.println();
+      System.out.println(p16.getAnswer());
+      break;
+    case 17:
+      P17 p17 = new P17();
+      System.out.println(p17.getQuestion());
+      System.out.println();
+      System.out.println(p17.getAnswer());
+      break;
     case 20:
       P20 p20 = new P20();
       System.out.println(p20.getQuestion());
       System.out.println();
       System.out.println(p20.getAnswer());
+      break;
+    case 22:
+      P22 p22 = new P22();
+      System.out.println(p22.getQuestion());
+      System.out.println();
+      System.out.println(p22.getAnswer());
+      break;
+    case 24:
+      P24 p24 = new P24();
+      System.out.println(p24.getQuestion());
+      System.out.println();
+      System.out.println(p24.getAnswer());
+      break;
+    case 25:
+      P25 p25 = new P25();
+      System.out.println(p25.getQuestion());
+      System.out.println();
+      System.out.println(p25.getAnswer());
       break;
     default:
       printNotSolved(Integer.toString(commandLineArg));
