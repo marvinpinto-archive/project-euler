@@ -33,7 +33,7 @@ public class P22 {
 
   private String answer;
   private Timer timer;
-  private Map dictionary;
+  private Map<String,Integer> dictionary;
 
 
   public P22() {
@@ -51,8 +51,7 @@ public class P22 {
       String name = names.get(i-1);
       BigInteger mScore = BigInteger.ZERO;
       for (int j=0;j<name.length();j++) {
-        Integer cVal = (Integer) (dictionary.get
-                                  (Character.toString(name.charAt(j))));
+        Integer cVal = dictionary.get(Character.toString(name.charAt(j)));
         mScore = mScore.add(BigInteger.valueOf(cVal.intValue()));
       }
       mScore = mScore.multiply(BigInteger.valueOf(i));

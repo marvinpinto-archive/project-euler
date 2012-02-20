@@ -29,7 +29,7 @@ public class P17 {
   private String answer;
   private int limit = 1000;
 
-  private Map dictionary;
+  private Map<Integer,String> dictionary;
 
 
   public P17() {
@@ -45,36 +45,36 @@ public class P17 {
       String w = "";
 
       if (i > 0 && i <= 20) {
-        w = w + (String) dictionary.get(i);
+        w = w + dictionary.get(i);
       } else if (i > 20 && i < 100) {
         int tens = (i / 10) * 10;
         int ones = i % 10;
-        w = w + (String) dictionary.get(tens);
-        w = w + (String) dictionary.get(ones);
+        w = w + dictionary.get(tens);
+        w = w + dictionary.get(ones);
       } else if (i >= 100 && i < 1000) {
         int numHundreds = i / 100;
         int hundreds = (i / 100) * 100;
         int tens = ((i / 10) * 10) - hundreds;
         int ones = i % 10;
         if (tens + ones <= 20) {
-          w = w + (String) dictionary.get(numHundreds);
-          w = w + (String) dictionary.get(100);
+          w = w + dictionary.get(numHundreds);
+          w = w + dictionary.get(100);
           if (tens+ones == 0) {
-            w = w + (String) dictionary.get(tens+ones);
+            w = w + dictionary.get(tens+ones);
           } else {
             w = w + "and";
-            w = w + (String) dictionary.get(tens+ones);
+            w = w + dictionary.get(tens+ones);
           }
         } else {
-          w = w + (String) dictionary.get(numHundreds);
-          w = w + (String) dictionary.get(100);
+          w = w + dictionary.get(numHundreds);
+          w = w + dictionary.get(100);
           w = w + "and";
-          w = w + (String) dictionary.get(tens);
-          w = w + (String) dictionary.get(ones);
+          w = w + dictionary.get(tens);
+          w = w + dictionary.get(ones);
         }
       } else if (i == 1000) {
-        w = w + (String) dictionary.get(1);
-        w = w + (String) dictionary.get(i);
+        w = w + dictionary.get(1);
+        w = w + dictionary.get(i);
       }
 
 
