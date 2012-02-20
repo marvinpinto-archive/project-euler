@@ -114,6 +114,7 @@ issues running this program.
  - [Problem 22](https://projecteuler.net/problem=22)
  - [Problem 24](https://projecteuler.net/problem=24)
  - [Problem 25](https://projecteuler.net/problem=25)
+ - [Problem 81](https://projecteuler.net/problem=67)
  - [Problem 81](https://projecteuler.net/problem=81)
  - [Problem 82](https://projecteuler.net/problem=82)
  - [Problem 83](https://projecteuler.net/problem=83)
